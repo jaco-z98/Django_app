@@ -4,7 +4,7 @@ from django.db import models
 #Jakub Zdanowski wypożyczalnia samochodów 
 class CarType(models.Model):
 
-    class_A = 'Klasa A'#Miejkie i małe(Fiat 500, Toyota Aygo)
+    class_A = 'Klasa A'#Miejskie i małe(Fiat 500, Toyota Aygo)
     class_B = 'Klasa B'#Większy w mieście(Renault Clio, Škoda Fabia)
     class_C = 'Klasa C'#Uniwersalne kompakty(Fiat Bravo, Mazda 3)
     class_D = 'Klasa D'#Rodzinna i wygoda(VW Passat,Mazda 6)
@@ -27,15 +27,16 @@ class CarType(models.Model):
                     (class_M, 'Klasa M')]
     
     type = models.CharField(max_length=50, choices=Choice_make)
-    
+    opis = models.TextField(blank=True)
 
-    objects = models.Manager()
+    # objects = models.Manager()
 
     def __str__(self):
         return self.type
 
     class Meta:
-        verbose_name = 'CarType'
+        verbose_name = "CarType"
+        verbose_name_plural = "CarTypes"
 
 class CarFuelType(models.Model):
 
@@ -48,21 +49,21 @@ class CarFuelType(models.Model):
                     (Electric, 'Elektryczny')]
     
     fueltype = models.ManyToManyField(CarType)
-    name = models.CharField(max_length=50, choices=Choice_make)
+    name = models.CharField(max_length=50, choices=Choice_make, null=True)
     
     
-    objects = models.Manager()
+    # objects = models.Manager()
 
     def __str__(self):
         return self.name
     
     class Meta:
-        verbose_name = 'FuelType'
-
+        verbose_name = "FuelType"
+        verbose_name_plural = "FuelTypes"
 class Car(models.Model):
 
-    objects = models.Manager()
-    classtype = models.ForeignKey(CarType, on_delete=models.CASCADE)
+    # objects = models.Manager()
+    type = models.ForeignKey(CarType, on_delete=models.CASCADE, null=True)
     fueltype = models.ManyToManyField(CarFuelType)
     production_year = models.IntegerField(default=None)
     brand = models.TextField(max_length=50)
@@ -73,3 +74,4 @@ class Car(models.Model):
     
     class Meta:
         verbose_name = "Car"
+        verbose_name_plural = "Cars"

@@ -1,11 +1,9 @@
-from statistics import mode
-from tabnanny import verbose
 from django.db import models
 
 class Producent(models.Model):
     
-    nazwa = models.CharField(max_length=60)                                                    #max 60 znaków
-    opis = models.TextField(blank=True)                                                        #opis nie jest obowiązkowy
+    nazwa = models.CharField(max_length=60)                                                       #max 60 znaków
+    opis = models.TextField(blank=True)                                                           #opis nie jest obowiązkowy
 
     def __str__(self):
         return self.nazwa
@@ -16,7 +14,7 @@ class Producent(models.Model):
 
 class Kategoria(models.Model):
     
-    nazwa = models.CharField(max_length=30)                                                    #max 30 znaków
+    nazwa = models.CharField(max_length=30)                                                      #max 30 znaków
 
     def __str__(self):
         return self.nazwa
@@ -39,6 +37,3 @@ class Produkty(models.Model):
     class Meta:
         verbose_name = "Produkt"
         verbose_name_plural = "Produkty"
-
-
-

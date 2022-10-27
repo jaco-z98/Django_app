@@ -1,19 +1,16 @@
-import imp
-import re
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import Kategoria, Produkty
 
 def index(request):
     wszystkie = Produkty.objects.all()
     kategorie = Kategoria.objects.all()
-    kat = Produkty.objects.filter(kategoria=4)
-    kat_name = Kategoria.objects.get(id=1)
-    producent = Produkty.objects.filter(producent=2)
-    null = Produkty.objects.filter(kategoria__isnull=False)
+#     kat = Produkty.objects.filter(kategoria=4)
+#     kat_name = Kategoria.objects.get(id=1)  
+#     null = Produkty.objects.filter(kategoria__isnull=False)
+    producent = Produkty.objects.filter(producent=2)                            
     dane = {'wszystkie' : wszystkie,
-            'kategorie' : kategorie}
+            'kategorie' : kategorie,
+            'producent' : producent}
     return render(request,'index.html', dane)
 
 def kategoria(request, id):
